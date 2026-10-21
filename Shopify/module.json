@@ -1,0 +1,31 @@
+{
+    "name": "Shopify",
+    "alias": "shopifydesk",
+    "description": "Shopify customer and orders in the conversation sidebar, customer sync, clickable order numbers, Workflows and Tags integration.",
+    "img": "https://raw.githubusercontent.com/haugtolas/freescout-shopify/main/Shopify/Public/img/icon.png",
+    "version": "1.0.0",
+    "detailsUrl": "https://github.com/haugtolas/freescout-shopify",
+    "author": "Shopify contributors",
+    "authorUrl": "https://github.com/haugtolas",
+    "latestVersionUrl": "https://raw.githubusercontent.com/haugtolas/freescout-shopify/main/VERSION",
+    "latestVersionZipUrl": "https://github.com/haugtolas/freescout-shopify/releases/latest/download/Shopify.zip",
+    "repository": "haugtolas/freescout-shopify",
+    "requiredAppVersion": "1.8.190",
+    "license": "AGPL-3.0",
+    "keywords": [
+        "shopify",
+        "ecommerce",
+        "orders",
+        "customers"
+    ],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Shopify\\Providers\\ShopifyServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}

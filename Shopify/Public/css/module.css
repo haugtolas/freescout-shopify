@@ -1,0 +1,459 @@
+/* ------------------------------------------------------------------
+   Shopify module
+   Neutral on purpose: text colors are inherited from the theme and
+   backgrounds are translucent, so it reads well in light and dark themes.
+   ------------------------------------------------------------------ */
+
+/* Sidebar block ---------------------------------------------------- */
+
+.shopify-loader {
+	margin: 10px 0 5px;
+	text-align: center;
+}
+
+.shopify-loading .panel-body {
+	opacity: .5;
+	pointer-events: none;
+	transition: opacity .15s;
+}
+
+.shopify-error {
+	margin: 6px 0;
+	padding: 8px 10px;
+	border-left: 3px solid #d72c0d;
+	background: rgba(215, 44, 13, .08);
+	border-radius: 3px;
+	font-size: 12px;
+	line-height: 1.4;
+}
+
+.shopify-error-detail {
+	margin-top: 4px;
+	font-size: 11px;
+	opacity: .75;
+	word-break: break-word;
+}
+
+.shopify-hint {
+	margin: 6px 0;
+	font-size: 12px;
+	opacity: .75;
+}
+
+/* Customer summary */
+
+.shopify-customer {
+	margin: 4px 0 10px;
+	padding-bottom: 8px;
+	border-bottom: 1px solid rgba(127, 127, 127, .25);
+}
+
+.shopify-customer-name {
+	font-weight: 600;
+	word-break: break-word;
+}
+
+.shopify-customer-stats {
+	margin-top: 2px;
+	font-size: 12px;
+	opacity: .85;
+}
+
+.shopify-customer-stats span + span:before {
+	content: "\00b7";
+	margin: 0 5px;
+}
+
+.shopify-tags {
+	margin-top: 6px;
+}
+
+.shopify-tag {
+	display: inline-block;
+	margin: 0 3px 3px 0;
+	padding: 1px 7px;
+	border-radius: 10px;
+	background: rgba(127, 127, 127, .18);
+	font-size: 11px;
+	line-height: 16px;
+}
+
+.shopify-note {
+	margin-top: 6px;
+	padding: 6px 8px;
+	border-radius: 4px;
+	background: rgba(127, 127, 127, .12);
+	font-size: 12px;
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+/* Orders list */
+
+.shopify-orders-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.shopify-orders-list li {
+	margin: 0 -6px;
+	padding: 6px;
+	border-bottom: 1px solid rgba(127, 127, 127, .2);
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.shopify-orders-list li:last-child {
+	border-bottom: 0;
+}
+
+.shopify-orders-list li:hover,
+.shopify-orders-list li:focus {
+	background: rgba(127, 127, 127, .14);
+	outline: none;
+}
+
+.shopify-order-top {
+	display: flex;
+	justify-content: space-between;
+	gap: 8px;
+}
+
+.shopify-order-name {
+	font-weight: 600;
+}
+
+.shopify-order-meta {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	gap: 4px;
+	margin-top: 2px;
+}
+
+.shopify-badges {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: 4px;
+}
+
+/* Status badges: the text keeps the theme color, the tone is in the border and tint. */
+
+.shopify-badge {
+	display: inline-block;
+	padding: 0 7px;
+	border: 1px solid rgba(127, 127, 127, .45);
+	border-radius: 10px;
+	background: rgba(127, 127, 127, .14);
+	font-size: 11px;
+	line-height: 17px;
+	white-space: nowrap;
+}
+
+.shopify-badge-success { border-color: rgba(46, 160, 67, .6);  background: rgba(46, 160, 67, .16); }
+.shopify-badge-info    { border-color: rgba(31, 111, 235, .55); background: rgba(31, 111, 235, .14); }
+.shopify-badge-warning { border-color: rgba(212, 143, 0, .65);  background: rgba(212, 143, 0, .18); }
+.shopify-badge-danger  { border-color: rgba(215, 44, 13, .6);   background: rgba(215, 44, 13, .15); }
+
+/* Search + refresh */
+
+.shopify-search {
+	display: flex;
+	gap: 4px;
+	margin-top: 10px;
+}
+
+.shopify-search .form-control {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+/* Order numbers turned into links inside messages */
+
+a.shopify-order-link {
+	border-bottom: 1px dotted currentColor;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+a.shopify-order-link:hover {
+	border-bottom-style: solid;
+	text-decoration: none;
+}
+
+/* Slide-out panel -------------------------------------------------- */
+
+.shopify-order-panel {
+	--shopify-bg: #ffffff;
+	--shopify-bg-soft: #f6f6f7;
+	--shopify-text: #1f2328;
+	--shopify-muted: #6a7177;
+	--shopify-line: #e1e3e5;
+	--shopify-link: #005bd3;
+
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 2000;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+.shopify-order-panel.shopify-dark {
+	--shopify-bg: #1d2024;
+	--shopify-bg-soft: #272b30;
+	--shopify-text: #e6e8eb;
+	--shopify-muted: #a1a8af;
+	--shopify-line: #3a3f45;
+	--shopify-link: #6ea8fe;
+}
+
+.shopify-order-panel.active {
+	visibility: visible;
+	pointer-events: auto;
+}
+
+.shopify-panel-overlay {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0, 0, 0, .45);
+	opacity: 0;
+	transition: opacity .2s;
+}
+
+.shopify-order-panel.active .shopify-panel-overlay {
+	opacity: 1;
+}
+
+.shopify-panel-content {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	flex-direction: column;
+	width: 440px;
+	max-width: 100%;
+	background: var(--shopify-bg-soft);
+	color: var(--shopify-text);
+	box-shadow: -4px 0 24px rgba(0, 0, 0, .25);
+	transform: translateX(100%);
+	transition: transform .22s ease-out;
+}
+
+.shopify-order-panel.active .shopify-panel-content {
+	transform: translateX(0);
+}
+
+.shopify-panel-header {
+	display: flex;
+	flex: 0 0 auto;
+	align-items: center;
+	justify-content: space-between;
+	padding: 14px 18px;
+	border-bottom: 1px solid var(--shopify-line);
+	background: var(--shopify-bg);
+}
+
+.shopify-panel-title {
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.shopify-panel-close {
+	padding: 0 6px;
+	border: 0;
+	background: transparent;
+	color: var(--shopify-muted);
+	font-size: 26px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.shopify-panel-close:hover,
+.shopify-panel-close:focus {
+	color: var(--shopify-text);
+}
+
+.shopify-panel-body {
+	flex: 1 1 auto;
+	padding: 14px;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.shopify-panel-message {
+	padding: 30px 10px;
+	text-align: center;
+	color: var(--shopify-muted);
+}
+
+/* Cards inside the panel */
+
+.shopify-panel-body .shopify-section {
+	margin-bottom: 12px;
+	padding: 12px 14px;
+	border: 1px solid var(--shopify-line);
+	border-radius: 10px;
+	background: var(--shopify-bg);
+}
+
+.shopify-panel-body .shopify-section-title {
+	margin-bottom: 8px;
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.shopify-panel-body .shopify-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 12px;
+	padding: 5px 0;
+	font-size: 13px;
+}
+
+.shopify-panel-body .shopify-label {
+	color: var(--shopify-muted);
+}
+
+.shopify-panel-body .shopify-value {
+	text-align: right;
+	word-break: break-word;
+}
+
+.shopify-panel-body .shopify-total {
+	margin-top: 4px;
+	padding-top: 8px;
+	border-top: 1px solid var(--shopify-line);
+	font-weight: 600;
+}
+
+.shopify-panel-body .shopify-sub {
+	color: var(--shopify-muted);
+	font-size: 12px;
+	word-break: break-word;
+}
+
+.shopify-panel-body .shopify-links {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin-top: 8px;
+	padding-top: 8px;
+	border-top: 1px solid var(--shopify-line);
+}
+
+.shopify-panel-body a,
+.shopify-panel-body a:hover {
+	color: var(--shopify-link);
+}
+
+.shopify-panel-body .shopify-tracking-number {
+	font-family: Menlo, Consolas, monospace;
+	font-size: 12px;
+	word-break: break-all;
+}
+
+.shopify-panel-body .shopify-tracking {
+	padding-bottom: 4px;
+}
+
+.shopify-panel-body .shopify-address {
+	font-size: 13px;
+	line-height: 1.5;
+}
+
+.shopify-panel-body .shopify-note {
+	background: var(--shopify-bg-soft);
+}
+
+.shopify-panel-body .shopify-tag {
+	background: var(--shopify-bg-soft);
+}
+
+/* Items */
+
+.shopify-line-item {
+	display: flex;
+	gap: 10px;
+	padding: 8px 0;
+	border-top: 1px solid var(--shopify-line);
+}
+
+.shopify-section-title + .shopify-line-item {
+	border-top: 0;
+}
+
+.shopify-line-item-image {
+	display: flex;
+	flex: 0 0 48px;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+	overflow: hidden;
+	border: 1px solid var(--shopify-line);
+	border-radius: 6px;
+	background: var(--shopify-bg-soft);
+	color: var(--shopify-muted);
+}
+
+.shopify-line-item-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.shopify-line-item-details {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+.shopify-line-item-name {
+	font-size: 13px;
+	font-weight: 500;
+	word-break: break-word;
+}
+
+.shopify-line-item-price {
+	flex: 0 0 auto;
+	font-size: 13px;
+	text-align: right;
+	white-space: nowrap;
+}
+
+/* Small screens: the panel uses the full width. */
+@media (max-width: 520px) {
+	.shopify-panel-content {
+		width: 100%;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.shopify-panel-content,
+	.shopify-panel-overlay,
+	.shopify-loading .panel-body {
+		transition: none;
+	}
+}
+
+/* Warning shown above an order that is not linked to the customer's email address */
+
+.shopify-panel-body .shopify-warning {
+	margin-bottom: 12px;
+	padding: 10px 12px;
+	border: 1px solid rgba(212, 143, 0, .65);
+	border-radius: 8px;
+	background: rgba(212, 143, 0, .16);
+	color: var(--shopify-text);
+	font-size: 13px;
+	line-height: 1.4;
+}
