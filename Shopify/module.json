@@ -3,7 +3,7 @@
     "alias": "shopifydesk",
     "description": "Shopify customer and orders in the conversation sidebar, customer sync, clickable order numbers, Workflows and Tags integration.",
     "img": "https://raw.githubusercontent.com/haugtolas/freescout-shopify/main/Shopify/Public/img/icon.png",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "detailsUrl": "https://github.com/haugtolas/freescout-shopify",
     "author": "Shopify contributors",
     "authorUrl": "https://github.com/haugtolas",

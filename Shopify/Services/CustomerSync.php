@@ -12,6 +12,9 @@ namespace Modules\Shopify\Services;
  */
 class CustomerSync
 {
+    /** \App\Customer::PHONE_TYPE_MOBILE */
+    const PHONE_TYPE_MOBILE = 4;
+
     /**
      * Map a Shopify customer node to FreeScout customer attributes.
      *
@@ -63,12 +66,18 @@ class CustomerSync
             return false;
         }
 
-        // addPhone() would add a second number next to an existing one.
-        if (isset($data['phone']) && method_exists($customer, 'getPhones') && count($customer->getPhones())) {
-            unset($data['phone']);
+        // The phone is added by hand: setData() would label it "Work", and a Shopify
+        // phone number is far more often a mobile. Never add a second number.
+        $phone = isset($data['phone']) ? $data['phone'] : '';
+        unset($data['phone']);
+        if ($data) {
+            $customer->setData($data, false, false);
         }
-
-        $customer->setData($data, false, false);
+        if ($phone !== '' && method_exists($customer, 'addPhone')
+            && !(method_exists($customer, 'getPhones') && count($customer->getPhones()))
+        ) {
+            $customer->addPhone($phone, self::PHONE_TYPE_MOBILE);
+        }
 
         if ($customer->isDirty()) {
             $customer->save();

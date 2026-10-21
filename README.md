@@ -17,6 +17,7 @@
 - 🔗 **Clickable order numbers** in messages (`#1001`, `SHOP-1001`, "commande 1001"…).
 - 👤 **Customer sync**: empty fields of the FreeScout profile are filled from Shopify.
 - ⚙️ **Workflows & Tags**: use Shopify data in your rules.
+- 🌙 Follows dark themes, including [Atelier](https://github.com/haugtolas/freescout-atelier).
 - 🌍 Translated into French, German, Spanish and Italian.
 - 🔒 **Read-only**: nothing is ever changed in Shopify.
 
@@ -61,6 +62,13 @@ That is all. Apps created before 2026 can use their `shpat_…` token instead (f
 With the **Workflows** module, the rule editor offers these conditions: Shopify customer exists, customer tags, number of orders, total spent, last order payment status, last order fulfillment status. And these actions: add a note with the Shopify summary, copy the Shopify tags as conversation tags (needs the **Tags** module).
 
 Example: *customer has the tag `vip` → add the tag `VIP` and assign to an agent*. If Shopify cannot be reached, a Shopify condition is simply not met.
+
+</details>
+
+<details>
+<summary><b>Dark theme</b></summary>
+
+<p align="center"><img src="docs/screenshots/dark.png" width="80%" alt="Dark theme with Atelier"></p>
 
 </details>
 

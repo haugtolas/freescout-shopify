@@ -186,12 +186,13 @@ a.shopify-order-link:hover {
 /* Slide-out panel -------------------------------------------------- */
 
 .shopify-order-panel {
-	--shopify-bg: #ffffff;
-	--shopify-bg-soft: #f6f6f7;
-	--shopify-text: #1f2328;
-	--shopify-muted: #6a7177;
-	--shopify-line: #e1e3e5;
-	--shopify-link: #005bd3;
+	/* Atelier (--at-*) colors are used when present, so the panel follows its palette. */
+	--shopify-bg: var(--at-surface, #ffffff);
+	--shopify-bg-soft: var(--at-page, #f6f6f7);
+	--shopify-text: var(--at-text, #1f2328);
+	--shopify-muted: var(--at-muted, #6a7177);
+	--shopify-line: var(--at-line, #e1e3e5);
+	--shopify-link: var(--at-link, #005bd3);
 
 	position: fixed;
 	top: 0;
@@ -203,13 +204,15 @@ a.shopify-order-link:hover {
 	pointer-events: none;
 }
 
-.shopify-order-panel.shopify-dark {
-	--shopify-bg: #1d2024;
-	--shopify-bg-soft: #272b30;
-	--shopify-text: #e6e8eb;
-	--shopify-muted: #a1a8af;
-	--shopify-line: #3a3f45;
-	--shopify-link: #6ea8fe;
+/* "inverted" = the page uses a dark theme. The word "dark" is avoided on purpose:
+   some themes strip every class and rule that contains it. */
+.shopify-order-panel.shopify-inverted {
+	--shopify-bg: var(--at-surface, #1d2024);
+	--shopify-bg-soft: var(--at-page, #272b30);
+	--shopify-text: var(--at-text, #e6e8eb);
+	--shopify-muted: var(--at-muted, #a1a8af);
+	--shopify-line: var(--at-line, #3a3f45);
+	--shopify-link: var(--at-link, #6ea8fe);
 }
 
 .shopify-order-panel.active {

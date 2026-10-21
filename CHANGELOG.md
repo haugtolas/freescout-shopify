@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1
+
+- The order panel follows the colors of the Atelier theme (light and dark, any palette). Before, it could stay light on a dark Atelier page until the page was reloaded.
+- Dark pages are detected more reliably (theme markers, color scheme, background, then text color).
+- The customer phone number copied from Shopify is now labelled Mobile instead of Work.
+
 ## 1.0.0
 
 First release.

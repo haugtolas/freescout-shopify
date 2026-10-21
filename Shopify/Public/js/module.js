@@ -195,7 +195,7 @@
         if (!isPanelOpen()) {
             lastFocus = document.activeElement;
         }
-        $p.toggleClass('shopify-dark', isDarkPage()).addClass('active').attr('aria-hidden', 'false');
+        $p.toggleClass('shopify-inverted', isDarkPage()).addClass('active').attr('aria-hidden', 'false');
         $('body').css('overflow', 'hidden');
         $p.find('.shopify-panel-close').trigger('focus');
     }
@@ -209,19 +209,65 @@
         lastFocus = null;
     }
 
-    /** True when the page background is dark (works with any dark mode module). */
-    function isDarkPage() {
-        var elements = [document.body, document.documentElement];
-        for (var i = 0; i < elements.length; i++) {
-            var color = window.getComputedStyle(elements[i]).backgroundColor;
-            var m = /rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*([\d.]+)\s*)?\)/.exec(color || '');
-            if (!m || (m[4] !== undefined && parseFloat(m[4]) === 0)) {
-                continue; // transparent: look at the parent.
-            }
-            return (0.299 * m[1] + 0.587 * m[2] + 0.114 * m[3]) / 255 < 0.45;
+    /** "rgb(1, 2, 3)" / "rgba(1, 2, 3, .5)" -> {l: luminance 0..1, a: alpha} or null */
+    function parseColor(color) {
+        var m = /rgba?\(\s*(\d+)\s*[, ]\s*(\d+)\s*[, ]\s*(\d+)\s*(?:[,/]\s*([\d.]+)\s*)?\)/.exec(color || '');
+        if (!m) {
+            return null;
         }
 
-        return false;
+        return {l: (0.299 * m[1] + 0.587 * m[2] + 0.114 * m[3]) / 255, a: m[4] === undefined ? 1 : parseFloat(m[4])};
+    }
+
+    /**
+     * True when the page uses a dark theme. Works with any dark mode module or theme:
+     * an explicit marker on <html>/<body> wins, then color-scheme, then the page
+     * background, and last the text color (a background made of an image or a
+     * gradient is "transparent" for CSS, but light text always means a dark page).
+     */
+    function isDarkPage() {
+        var elements = [document.documentElement, document.body];
+        var i, el, v;
+        var marker = /(^|[\s_-])dark($|[\s_-])/i;
+
+        for (i = 0; i < elements.length; i++) {
+            el = elements[i];
+            if (!el) {
+                continue;
+            }
+            for (var a = 0; a < el.attributes.length; a++) {
+                var attr = el.attributes[a];
+                if (attr.name !== 'class' && !/^data-.*(theme|mode|color-scheme)/.test(attr.name)) {
+                    continue;
+                }
+                if (/(^|[\s_-])light($|[\s_-])/i.test(attr.value) && !marker.test(attr.value)) {
+                    return false;
+                }
+                if (marker.test(attr.value)) {
+                    return true;
+                }
+            }
+        }
+
+        for (i = 0; i < elements.length; i++) {
+            if (elements[i] && /dark/.test(window.getComputedStyle(elements[i]).colorScheme || '')) {
+                return true;
+            }
+        }
+
+        for (i = elements.length - 1; i >= 0; i--) {
+            if (!elements[i]) {
+                continue;
+            }
+            v = parseColor(window.getComputedStyle(elements[i]).backgroundColor);
+            if (v && v.a > 0.5) {
+                return v.l < 0.45;
+            }
+        }
+
+        v = parseColor(window.getComputedStyle(document.body).color);
+
+        return !!(v && v.l > 0.7);
     }
 
     // ------------------------------------------------------------------

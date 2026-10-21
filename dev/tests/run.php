@@ -563,6 +563,8 @@ class FakeCustomer
     public function setData($data, $replace = true, $save = false) { $this->received = [$data, $replace, $save]; }
     public function isDirty() { return $this->dirty; }
     public function save() { $this->saved = true; }
+    public $added = [];
+    public function addPhone($phone, $type = 1) { $this->added[] = [$phone, $type]; }
     public function getPhones() { return $this->phones; }
 }
 
@@ -581,7 +583,8 @@ test('maps Shopify fields and only fills empty fields', function () {
     eq('Jane', $c->received[0]['first_name']);
     eq('1 rue de Rivoli Apt 4', $c->received[0]['address']);
     eq('FR', $c->received[0]['country']);
-    eq('+33612345678', $c->received[0]['phone']);
+    truthy(!isset($c->received[0]['phone']), 'the phone goes through addPhone(), not setData()');
+    eq([['+33612345678', 4]], $c->added, 'phone is added as Mobile');
 });
 
 test('does not add a second phone number', function () {
@@ -589,6 +592,7 @@ test('does not add a second phone number', function () {
     $c->phones = [['value' => '0102030405']];
     CustomerSync::apply($c, ['firstName' => 'Jane', 'phone' => '+33612345678']);
     truthy(!isset($c->received[0]['phone']));
+    eq([], $c->added);
 });
 
 test('does not save when nothing changed, nor when Shopify has nothing', function () {
