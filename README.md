@@ -6,8 +6,8 @@
 <p align="center">The Shopify customer and their orders, right inside your <a href="https://freescout.net">FreeScout</a> conversations.</p>
 
 <p align="center">
-  <img src="docs/screenshots/conversation-light.png" width="49%" alt="Customer and orders in the sidebar">
-  <img src="docs/screenshots/order-light.png" width="49%" alt="Order details panel">
+  <img src="docs/screenshots/conversation.png" width="49%" alt="Customer and orders in the sidebar">
+  <img src="docs/screenshots/order.png" width="49%" alt="Order details panel">
 </p>
 
 ## What you get
@@ -17,7 +17,7 @@
 - 🔗 **Clickable order numbers** in messages (`#1001`, `SHOP-1001`, "commande 1001"…).
 - 👤 **Customer sync**: empty fields of the FreeScout profile are filled from Shopify.
 - ⚙️ **Workflows & Tags**: use Shopify data in your rules.
-- 🌙 Dark theme, translated into French, German, Spanish and Italian.
+- 🌍 Translated into French, German, Spanish and Italian.
 - 🔒 **Read-only**: nothing is ever changed in Shopify.
 
 ## Install (2 minutes)
@@ -86,13 +86,6 @@ Example: *customer has the tag `vip` → add the tag `VIP` and assign to an agen
 | Missing permissions | Add the scope, release a new app version, accept the update (Shopify admin → Settings → Apps). |
 | Orders older than 60 days are missing | `read_all_orders` is not granted. |
 | Shop not found | Use the `.myshopify.com` domain. |
-
-</details>
-
-<details>
-<summary><b>Dark theme</b></summary>
-
-<p align="center"><img src="docs/screenshots/order-dark.png" width="80%" alt="Dark theme"></p>
 
 </details>
 

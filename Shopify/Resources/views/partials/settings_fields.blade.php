@@ -51,7 +51,7 @@
     <label class="col-sm-2 control-label"></label>
     <div class="col-sm-6">
         <details @if ($val('access_token') !== '') open @endif>
-            <summary class="text-help" style="cursor:pointer">&#9656; {{ __('Legacy access token') }} <small>({{ __('Only for custom apps created before 2026 (token starting with shpat_)') }})</small></summary>
+            <summary class="text-help" style="cursor:pointer">&#9656; {{ __('Legacy access token') }} <small>{{ __('Only for custom apps created before 2026 (token starting with shpat_)') }}</small></summary>
             <input type="password" class="form-control input-sized-lg margin-top-10" name="settings[shopify.access_token]" value="{{ $val('access_token') }}" autocomplete="new-password">
             <p class="form-help">
                 {{ __('Optional. If set, it is used instead of the Client ID and Client secret.') }}
